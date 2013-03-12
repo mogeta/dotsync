@@ -1,0 +1,4 @@
+name: channelDart
+dependencies:
+  appengine_channel: any
+  js: any

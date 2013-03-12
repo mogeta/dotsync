@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hello</title>
+  </head>
+  <body>
+    <h1>Hello</h1>
+    <form action="#">
+      <input type="button" id="button_id" value="OK" ><!--onclick="return exe()"-->
+    </form><br />
+    <p>Hello world from Dart!</p>
+
+    <div id="area"></div>
+
+    <script>
+     var token    = "{{.token}}"
+     var me       = "{{.me}}"
+     var game_key = "{{.game_key}}"
+    </script> 
+    <script type="text/javascript" src="/_ah/channel/jsapi"></script>
+    <script type="text/javascript" src="/js/channel-dart.js"></script> 
+    <script type="application/dart" src="/dart/hello.dart"></script>
+    <script src="/js/dart.js"></script>
+  </body>
+</html>
