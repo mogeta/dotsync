@@ -42,7 +42,7 @@ void setButtonListner(String meID,String gameID){
   btn.onClick.listen((e){
     var httpRequest;
     httpRequest = new HttpRequest();
-    httpRequest.open('POST', '/receive?g=${meID}${gameID}', true);
+    httpRequest.open('POST', '/receive?g=${meID}${gameID}', async:true);
     httpRequest.send();
   });
 }
