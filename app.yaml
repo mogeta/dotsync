@@ -3,6 +3,9 @@ version: 1
 runtime: go
 api_version: go1
 
+inbound_services:
+- channel_presence
+
 handlers:
 - url: /favicon\.ico
   static_files: favicon.ico
@@ -22,6 +25,9 @@ handlers:
 - url: /js
   static_dir: js
 
+- url: /img
+  static_dir: img
+
 - url: /package
   static_dir: package
 
@@ -30,6 +36,12 @@ handlers:
 
 - url: /html
   static_dir: html
+
+- url: /_ah/channel/connected/
+  script: _go_app
+
+- url: /_ah/channel/disconnected/
+  script: _go_app
 
 - url: /.*
   script: _go_app
