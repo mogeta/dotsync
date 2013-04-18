@@ -28,7 +28,7 @@ void openChannel(String token) {
   ch.Socket   socket = channel.open()
     ..onOpen    = (() => print("open"))
     ..onClose   = (() => print("close"))
-    ..onMessage = ((m){
+    ..onMessage = ((m){ 
       element.innerHtml = "${element.innerHtml}${m}<br />";
         print("${m}");
       })
