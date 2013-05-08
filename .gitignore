@@ -1,2 +1,6 @@
 .DS_Store
+
+.idea/
+
+dart/pubspec.lock
 dart/packages
