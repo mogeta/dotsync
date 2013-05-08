@@ -9,7 +9,7 @@ import (
 	"appengine/user"
 )
 
-var mainTemplate = template.Must(template.ParseFiles("channelDart/main.html"))
+var mainTemplate = template.Must(template.ParseFiles("dotsync/canvas.html"))
 
 func init() {
 	http.HandleFunc("/_ah/channel/connected/", connected)
@@ -44,12 +44,13 @@ func main(w http.ResponseWriter, r *http.Request) {
 func receive(w http.ResponseWriter, r *http.Request) {
 	c := appengine.NewContext(r)
 	//key := r.FormValue("g")
-	param := r.FormValue("p")
+	//param := r.FormValue("p")
+	msg := r.FormValue("m")
 
 	users := getUsers("users", c)
 	for i, _ := range users.member {
 		//channel.Send(c, i, "go receive!"+time.Now().String())
-		channel.Send(c, i, param)
+		channel.Send(c, i, msg)
 	}
 }
 func connected(w http.ResponseWriter, r *http.Request) {

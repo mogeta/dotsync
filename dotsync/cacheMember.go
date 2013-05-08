@@ -38,6 +38,15 @@ func (u *Users) DeleteUser(key string) {
 	u.saveUserList()
 }
 
+func (u *Users) checkExpire() {
+	now := int32(time.Now().Unix())
+	for i, j := range u.member {
+		if now-j > 60*60*2 {
+			delete(u.member, i)
+		}
+	}
+}
+
 func getUsers(s string, c appengine.Context) *Users {
 	data := &Users{
 		Name:    s,
