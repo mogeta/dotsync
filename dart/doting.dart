@@ -77,10 +77,6 @@ class Doting {
             t.cancel();
           }
         });
-    
-    //create sendData
-
-    //runAsync(print(stringify(mapData)));
   }
 
 }

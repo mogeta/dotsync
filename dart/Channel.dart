@@ -1,3 +1,5 @@
+library Channel;
+
 import 'package:js/js.dart' as js;
 import 'package:appengine_channel/appengine_channel.dart' as ch;
 import 'dart:html';
@@ -21,12 +23,8 @@ class Channel {
       meID   = js.context.me;
       gameID = js.context.game_key;
     });
-//    js.scoped(() {
-//   js.context.alert('Hello from Dart via JS');
-//   });
     
     openChannel(token);
-    //setButtonListner(meID,gameID);
   }
   
   void openChannel(String token) {
@@ -36,17 +34,12 @@ class Channel {
         ..onOpen    = (() => print("open"))
         ..onClose   = (() => print("close"))
         ..onMessage = ((m) => receive(m))
-//        ..onMessage = ((m){
-//          element.innerHtml = "${element.innerHtml}${m}<br />";
-//          print("${m}");
-//        })
         ..onError   = ((code, desc) => print("error: $code $desc"));
   }
   
   void sendMessage(String msg){
     var httpRequest;
     httpRequest = new HttpRequest();
-//    httpRequest.open('POST', '/receive?g=${meID}${gameID}&msg=${msg}', true);
     httpRequest.open('POST', '/receive?p=${meID}${gameID}&m=${msg}', async:true);
     httpRequest.send();
   }
