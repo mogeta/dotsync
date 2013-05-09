@@ -1,7 +1,7 @@
 Sample of channelAPI using go and dart 
 
 
-dev_appserver.py --port=9999 channelDart
+dev_appserver.py --port=9999 dotsync
 
 http://127.0.0.1:9999
 
