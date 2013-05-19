@@ -4,3 +4,7 @@
 
 dart/pubspec.lock
 dart/packages
+
+dart/*.dart.js
+dart/*.dart.js.deps
+dart/*.dart.js.map

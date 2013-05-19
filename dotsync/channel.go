@@ -6,7 +6,7 @@ import (
 
 	"appengine"
 	"appengine/channel"
-	"appengine/user"
+	"time"
 )
 
 var mainTemplate = template.Must(template.ParseFiles("dotsync/canvas.html"))
@@ -21,10 +21,12 @@ func init() {
 func main(w http.ResponseWriter, r *http.Request) {
 
 	c := appengine.NewContext(r)
-	getUsers("users", c)
-	u := user.Current(c) // assumes 'login: required' set in app.yaml
+	u := time.Now().Format("20060102150405")
+	//users := getUsers("users", c)
+	//users.RegistUser(u)
+
 	key := r.FormValue("gamekey")
-	tok, err := channel.Create(c, u.ID+key)
+	tok, err := channel.Create(c, u+key)
 	if err != nil {
 		http.Error(w, "Couldn't create Channel", http.StatusInternalServerError)
 		c.Errorf("channel.Create: %v", err)
@@ -33,7 +35,7 @@ func main(w http.ResponseWriter, r *http.Request) {
 
 	err = mainTemplate.Execute(w, map[string]string{
 		"token":    tok,
-		"me":       u.ID,
+		"me":       u,
 		"game_key": key,
 	})
 	if err != nil {
@@ -42,14 +44,13 @@ func main(w http.ResponseWriter, r *http.Request) {
 }
 
 func receive(w http.ResponseWriter, r *http.Request) {
+
 	c := appengine.NewContext(r)
-	//key := r.FormValue("g")
-	//param := r.FormValue("p")
+	c.Infof("receive")
 	msg := r.FormValue("m")
 
 	users := getUsers("users", c)
 	for i, _ := range users.member {
-		//channel.Send(c, i, "go receive!"+time.Now().String())
 		channel.Send(c, i, msg)
 	}
 }

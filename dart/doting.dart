@@ -8,6 +8,7 @@ import 'Channel.dart';
 
 class Doting { 
   CanvasRenderingContext2D ctx;
+  Rect canvasRect;
   Channel ch;
   var clientRect;
   
@@ -15,6 +16,7 @@ class Doting {
   
   Doting() {
     CanvasElement canvas = document.query("#canvas");
+    canvasRect = document.query("#canvas").getBoundingClientRect();
 
     ch = new Channel();
     ch.receive  = receive;
@@ -36,15 +38,18 @@ class Doting {
   }
   
   void receive(m){
-    print("test");
-    print(m);
+    //print("test");
+    //print(m);
     Map data = parse(m);
     drawPixel(data["x"],data["y"],data["r"],data["g"],data["b"]);
   }
   
-  void canvasClickEvent(e){
-    var x = ((e.clientX - clientRect.left)/32).floor();
-    var y = ((e.clientY - clientRect.top)/32).floor();
+  void canvasClickEvent(MouseEvent e){
+     var rect = document.query("#canvas").getBoundingClientRect();
+     var x = ((e.clientX - rect.left)/32).floor();
+     var y = ((e.clientY - rect.top)/32).floor();
+    //var x = ((e.clientX - clientRect.left)/32).floor();
+    //var y = ((e.clientY - clientRect.top)/32).floor();
     drawPixel(x,y,nowR,nowG,nowB);
     
     var mapData = new Map();
